@@ -12,7 +12,7 @@ const CartSchema=new mongoose.Schema({
         type:Number,
         default:1
     },
-    size:{
+    panditType:{
         type:String
     }, 
     pricePerItem:{
