@@ -33,7 +33,7 @@ router.post("/register", async (req,res)=>{
 //Login its for encryption
 // router.post("/login",async (req,res)=>{
 //     try{
-//         const user=await User.findOne({username:req.body.username});
+//         const user=await User.findOne({email:req.body.email});
 //         !user && res.status(401).json("Wrong Credentials");
         
 //         const hashedPassword=CryptoJS.AES.decrypt(user.password,process.env.PASS_SEC);
@@ -63,15 +63,15 @@ router.post("/register", async (req,res)=>{
 
 router.post("/admin/login",async (req,res)=>{
 
-    const{username,password}=req.body;
+    const{email,password}=req.body;
 
-    if(!username || !password) return res.status(400).send("Plz add email or password")
+    if(!email || !password) return res.status(400).send("Plz add email or password")
     try{
-        const check = await User.findOne({username:username})
+        const check = await User.findOne({email:email})
         if(check && password===check.password && check.isAdmin)  {
             res.status(200).json(check)
         }
-        else res.status(400).send("invalid username or password");
+        else res.status(400).send("invalid email or password");
 
     }catch(e){
         res.status(500).send("Error while checking user")
@@ -80,15 +80,15 @@ router.post("/admin/login",async (req,res)=>{
 
 router.post("/login",async (req,res)=>{
 
-    const{username,password}=req.body;
+    const{email,password}=req.body;
 
-    if(!username || !password) return res.status(400).send("Plz add email or password")
+    if(!email || !email) return res.status(400).send("Plz add email or password")
     try{
-        const check = await User.findOne({username:username})
+        const check = await User.findOne({email:email})
         if(check && password===check.password)  {
             res.status(200).json(check)
         }
-        else res.status(400).send("invalid username or password");
+        else res.status(400).send("invalid email or password");
 
     }catch(e){
         res.status(500).send("Error while checking user")
