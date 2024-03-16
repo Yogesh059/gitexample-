@@ -63,15 +63,15 @@ router.post("/register", async (req,res)=>{
 
 router.post("/admin/login",async (req,res)=>{
 
-    const{email,password}=req.body;
+    const{username,password}=req.body;
 
-    if(!email || !password) return res.status(400).send("Plz add email or password")
+    if(!username || !password) return res.status(400).send("Plz add email or password")
     try{
-        const check = await User.findOne({email:email})
+        const check = await User.findOne({username:username})
         if(check && password===check.password && check.isAdmin)  {
             res.status(200).json(check)
         }
-        else res.status(400).send("invalid email or password");
+        else res.status(400).send("invalid username or password");
 
     }catch(e){
         res.status(500).send("Error while checking user")
@@ -80,15 +80,15 @@ router.post("/admin/login",async (req,res)=>{
 
 router.post("/login",async (req,res)=>{
 
-    const{email,password}=req.body;
+    const{username,password}=req.body;
 
-    if(!email || !password) return res.status(400).send("Plz add email or password")
+    if(!username || !password) return res.status(400).send("Plz add username or password")
     try{
-        const check = await User.findOne({email:email})
+        const check = await User.findOne({username:username})
         if(check && password===check.password)  {
             res.status(200).json(check)
         }
-        else res.status(400).send("invalid email or password");
+        else res.status(400).send("invalid username or password");
 
     }catch(e){
         res.status(500).send("Error while checking user")
