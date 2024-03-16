@@ -82,7 +82,7 @@ router.post("/login",async (req,res)=>{
 
     const{email,password}=req.body;
 
-    if(!email || !email) return res.status(400).send("Plz add email or password")
+    if(!email || !password) return res.status(400).send("Plz add email or password")
     try{
         const check = await User.findOne({email:email})
         if(check && password===check.password)  {
