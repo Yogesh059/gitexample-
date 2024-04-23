@@ -17,6 +17,7 @@ router.post("/register", async (req,res)=>{
         lname:req.body.lname,
         userType:req.body.userType,
         User_Type:req.body.User_Type,
+        termsChecked: req.body.termsChecked,
         
     });
 
